@@ -17,7 +17,6 @@ WORKDIR /code
 ENV FLASK_APP=main.py \
     FLASK_DEBUG=0 \
     PYTHONUNBUFFERED=1 \
-    GUNICORN_WORKERS=4 \
     GUNICORN_BIND=0.0.0.0:443 \
     GUNICORN_CERTFILE=/etc/letsencrypt/live/yinyang.codes/fullchain.pem \
     GUNICORN_KEYFILE=/etc/letsencrypt/live/yinyang.codes/privkey.pem
@@ -26,4 +25,4 @@ ENV FLASK_APP=main.py \
 EXPOSE 443
 
 # Run Gunicorn
-CMD ["gunicorn", "main:app", "--workers", "${GUNICORN_WORKERS}", "--bind", "${GUNICORN_BIND}", "--certfile", "${GUNICORN_CERTFILE}", "--keyfile", "${GUNICORN_KEYFILE}"]
+CMD ["gunicorn", "main:app", "--workers", "4", "--bind", "${GUNICORN_BIND}", "--certfile", "${GUNICORN_CERTFILE}", "--keyfile", "${GUNICORN_KEYFILE}"]
