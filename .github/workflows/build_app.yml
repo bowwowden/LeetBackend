@@ -31,6 +31,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
+            cd /home/linuxuser/LeetBackend/
             docker-compose down
             rm -rf /home/linuxuser/LeetBackend/*
             cp -r /home/linuxuser/LeetBackendTemp/* /home/linuxuser/LeetBackend/
