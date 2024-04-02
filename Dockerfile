@@ -13,10 +13,8 @@ RUN mkdir -p /code
 COPY *.py /code/
 WORKDIR /code
 
-# Copy SSL certificate files into the Docker image
+# Copy SSL certificate files from the host machine
 COPY /etc/letsencrypt/live/yinyang.codes/fullchain.pem /etc/letsencrypt/live/yinyang.codes/privkey.pem /etc/letsencrypt/live/yinyang.codes/
-
-RUN ls -l /etc/letsencrypt/live/yinyang.codes/
 
 # Set environment variables
 ENV FLASK_APP=main.py \
