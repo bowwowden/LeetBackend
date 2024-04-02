@@ -16,7 +16,8 @@ orm.start_mappers()
 get_session = sessionmaker(bind=engine)
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})  # Allow requests from all origins
+
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -73,8 +74,8 @@ def addproblems():
         category=request.json["category"],
         code=request.json["code"],
         input_arrays=request.json.get("input_arrays"),
-        input_boolean=request.json.get("input_boolean"),
-        input_string=request.json.get("input_string")
+        # input_boolean=request.json.get("input_boolean"),
+        # input_string=request.json.get("input_string")
     )
 
     try:
@@ -137,5 +138,5 @@ def getproblem(problem_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=9900)
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0', port=9900)

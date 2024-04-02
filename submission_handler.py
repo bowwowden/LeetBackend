@@ -1,7 +1,8 @@
 import requests
 import time
+import config
 
-url = 'http://192.168.0.220:2358/'
+url = config.judge0_url
 
 
 def map_language(lang):
