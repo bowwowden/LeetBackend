@@ -16,6 +16,8 @@ WORKDIR /code
 # Copy SSL certificate files into the Docker image
 COPY /etc/letsencrypt/live/yinyang.codes/fullchain.pem /etc/letsencrypt/live/yinyang.codes/privkey.pem /etc/letsencrypt/live/yinyang.codes/
 
+RUN ls -l /etc/letsencrypt/live/yinyang.codes/
+
 # Set environment variables
 ENV FLASK_APP=main.py \
     FLASK_DEBUG=0 \
@@ -28,4 +30,4 @@ ENV FLASK_APP=main.py \
 EXPOSE 443
 
 # Run Gunicorn
-CMD ["gunicorn", "main:app", "--workers", "4", "--bind", "${GUNICORN_BIND}", "--certfile", "${GUNICORN_CERTFILE}", "--keyfile", "${GUNICORN_KEYFILE}"]
+CMD gunicorn main:app --workers 4 --bind ${GUNICORN_BIND} --certfile ${GUNICORN_CERTFILE} --keyfile ${GUNICORN_KEYFILE}
