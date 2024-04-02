@@ -16,7 +16,7 @@ WORKDIR /code
 # Set environment variables
 ENV FLASK_APP=main.py \
     FLASK_DEBUG=0 \
-    PYTHONUNBUFFERED=1 \
+    PYTHONUNBUFFERED=1
 
 # Copy SSL certificate files into the Docker image
 COPY fullchain.pem privkey.pem ./
