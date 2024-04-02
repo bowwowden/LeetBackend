@@ -16,7 +16,8 @@ orm.start_mappers()
 get_session = sessionmaker(bind=engine)
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})  # Allow requests from all origins
+
 
 
 @app.route('/', methods=['GET', 'POST'])
