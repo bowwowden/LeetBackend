@@ -13,18 +13,14 @@ RUN mkdir -p /code
 COPY *.py /code/
 WORKDIR /code
 
-
-#ENV FLASK_APP=main.py FLASK_DEBUG=1 PYTHONUNBUFFERED=1
-#CMD flask run --host=0.0.0.0 --port=80
-
 # Set environment variables
 ENV FLASK_APP=main.py \
     FLASK_DEBUG=0 \
     PYTHONUNBUFFERED=1 \
     GUNICORN_WORKERS=4 \
     GUNICORN_BIND=0.0.0.0:443 \
-    GUNICORN_CERTFILE=/home/linuxuser/Leet-SSL-Keys/certificate.crt \
-    GUNICORN_KEYFILE=/home/linuxuser/Leet-SSL-Keys/private.key
+    GUNICORN_CERTFILE=/etc/letsencrypt/live/yinyang.codes/fullchain.pem \
+    GUNICORN_KEYFILE=/etc/letsencrypt/live/yinyang.codes/privkey.pem
 
 # Expose port 443 for HTTPS
 EXPOSE 443
