@@ -1,6 +1,6 @@
 import os
 
-judge0_url = 'http://localhost:2358/'
+judge0_url = 'http://155.138.214.97:2358/'
 
 def get_postgres_uri():
     host = os.environ.get("DB_HOST", "localhost")
