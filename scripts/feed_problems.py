@@ -15,7 +15,7 @@ data1 = {
     ],
 
     # 'goldstandardcode': 'sorted()',
-    # # "input_boolean": self.input_boolean,
+    # "input_boolean": self.input_boolean,
     # "input_string": self.input_string,
 
 }

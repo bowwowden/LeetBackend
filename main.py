@@ -73,8 +73,8 @@ def addproblems():
         category=request.json["category"],
         code=request.json["code"],
         input_arrays=request.json.get("input_arrays"),
-        input_boolean=request.json.get("input_boolean"),
-        input_string=request.json.get("input_string")
+        # input_boolean=request.json.get("input_boolean"),
+        # input_string=request.json.get("input_string")
     )
 
     try:
