@@ -19,11 +19,11 @@ ENV FLASK_APP=main.py \
     PYTHONUNBUFFERED=1 \
     GUNICORN_BIND=0.0.0.0:443
 
-# Copy SSL certificate files from the host machine
-COPY /etc/letsencrypt/live/yinyang.codes/fullchain.pem /etc/letsencrypt/live/yinyang.codes/privkey.pem /etc/letsencrypt/live/yinyang.codes/
-
 # Expose port 443 for HTTPS
 EXPOSE 443
 
+# Copy SSL certificate files into the Docker image
+COPY fullchain.pem privkey.pem ./
+
 # Run Gunicorn
-CMD ["gunicorn", "main:app", "--workers", "4", "--bind", "${GUNICORN_BIND}", "--certfile", "/etc/letsencrypt/live/yinyang.codes/fullchain.pem", "--keyfile", "/etc/letsencrypt/live/yinyang.codes/privkey.pem"]
+CMD ["gunicorn", "main:app", "--workers", "4", "--bind", "${GUNICORN_BIND}", "--certfile", "fullchain.pem", "--keyfile", "privkey.pem"]
