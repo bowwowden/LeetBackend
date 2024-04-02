@@ -1,0 +1,43 @@
+name: Deploy Python API
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Copy build to VM
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "."
+          target: "/home/linuxuser/LeetBackendTemp"
+
+      - name: Deploy to Virtual Machine
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd /home/linuxuser/LeetBackend/
+            docker-compose down
+            rm -rf /home/linuxuser/LeetBackend/*
+            cp -r /home/linuxuser/LeetBackendTemp/* /home/linuxuser/LeetBackend/
+            docker-compose build
+            docker-compose up -d app         
+            
+
+
+
