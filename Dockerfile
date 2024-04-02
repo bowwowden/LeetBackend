@@ -17,7 +17,6 @@ WORKDIR /code
 ENV FLASK_APP=main.py \
     FLASK_DEBUG=0 \
     PYTHONUNBUFFERED=1 \
-    GUNICORN_BIND=0.0.0.0:443
 
 # Expose port 443 for HTTPS
 EXPOSE 443
@@ -25,5 +24,4 @@ EXPOSE 443
 # Copy SSL certificate files into the Docker image
 COPY fullchain.pem privkey.pem ./
 
-# Run Gunicorn
-CMD ["gunicorn", "main:app", "--workers", "4", "--bind", "${GUNICORN_BIND}", "--certfile", "fullchain.pem", "--keyfile", "privkey.pem"]
+CMD ["gunicorn", "main:app", "--workers", "4", "--bind", "0.0.0.0:443", "--certfile", "fullchain.pem", "--keyfile", "privkey.pem"]
