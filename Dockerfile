@@ -13,19 +13,17 @@ RUN mkdir -p /code
 COPY *.py /code/
 WORKDIR /code
 
-# Copy SSL certificate files from the host machine
-COPY /etc/letsencrypt/live/yinyang.codes/fullchain.pem /etc/letsencrypt/live/yinyang.codes/privkey.pem /etc/letsencrypt/live/yinyang.codes/
-
 # Set environment variables
 ENV FLASK_APP=main.py \
     FLASK_DEBUG=0 \
     PYTHONUNBUFFERED=1 \
-    GUNICORN_BIND=0.0.0.0:443 \
-    GUNICORN_CERTFILE=/etc/letsencrypt/live/yinyang.codes/fullchain.pem \
-    GUNICORN_KEYFILE=/etc/letsencrypt/live/yinyang.codes/privkey.pem
+    GUNICORN_BIND=0.0.0.0:443
+
+# Copy SSL certificate files from the host machine
+COPY /etc/letsencrypt/live/yinyang.codes/fullchain.pem /etc/letsencrypt/live/yinyang.codes/privkey.pem /etc/letsencrypt/live/yinyang.codes/
 
 # Expose port 443 for HTTPS
 EXPOSE 443
 
 # Run Gunicorn
-CMD gunicorn main:app --workers 4 --bind ${GUNICORN_BIND} --certfile ${GUNICORN_CERTFILE} --keyfile ${GUNICORN_KEYFILE}
+CMD ["gunicorn", "main:app", "--workers", "4", "--bind", "${GUNICORN_BIND}", "--certfile", "/etc/letsencrypt/live/yinyang.codes/fullchain.pem", "--keyfile", "/etc/letsencrypt/live/yinyang.codes/privkey.pem"]
