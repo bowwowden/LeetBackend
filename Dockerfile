@@ -18,9 +18,6 @@ ENV FLASK_APP=main.py \
     FLASK_DEBUG=0 \
     PYTHONUNBUFFERED=1 \
 
-# Expose port 443 for HTTPS
-EXPOSE 443
-
 # Copy SSL certificate files into the Docker image
 COPY fullchain.pem privkey.pem ./
 
