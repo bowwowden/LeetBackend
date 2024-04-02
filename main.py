@@ -20,7 +20,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})  # Allow requests from all origin
 
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/api', methods=['GET', 'POST'])
 def welcome():
     code = "<p> Code </p>"
 
@@ -138,5 +138,4 @@ def getproblem(problem_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=9900)
+
