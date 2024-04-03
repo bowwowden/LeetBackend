@@ -28,7 +28,7 @@ def submit_code(body):
         "language_id": map_language(language)
     }
 
-    request = requests.post((url + 'submissions/?base64_encoded=false&wait=false'), json=myobj)
+    request = requests.post((url + '/submissions/?base64_encoded=false&wait=false'), json=myobj)
 
     # Parse the JSON response
     response_data = request.json()

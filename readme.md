@@ -36,3 +36,8 @@ Supported languages
 ```angular2html
 curl 192.168.0.220:2358/languages | jq | less
 ```
+
+Note: judge0 has issues with newer versions of ubuntu so it needs a grub setting change.
+https://github.com/judge0/judge0/issues/325
+
+
