@@ -1,6 +1,8 @@
 import json
 
 from flask import Flask, request, jsonify, send_from_directory
+# Configure Flask logging to print to console
+import logging
 from flask_cors import CORS
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
@@ -15,13 +17,22 @@ orm.metadata.create_all(engine)
 orm.start_mappers()
 get_session = sessionmaker(bind=engine)
 
+
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})  # Allow requests from all origins
 
-@app.route('/api', methods=['GET', 'POST'])
+app.logger.setLevel(logging.DEBUG)
+# Define a route for serving Sphinx documentation
+
 @app.route('/api/<path:filename>')
-def welcome(filename='index.html'):
-    return send_from_directory('build/html', filename)
+@app.route('/api/', defaults={'filename': 'index.html'})
+def serve_documentation(filename):
+    directory = 'build/html'  # Adjust this path based on your Sphinx build directory
+
+    # Log the directory and filename being served
+    app.logger.debug(f"Serving file '{filename}' from directory '{directory}'")
+
+    return send_from_directory(directory, filename)
 
 
 @app.route('/submit/', methods=['POST'])

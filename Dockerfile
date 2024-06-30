@@ -10,17 +10,22 @@ COPY requirements.txt /tmp
 RUN pip install -r /tmp/requirements.txt
 
 RUN mkdir -p /code
-COPY *.py /code/
+#RUN mkdir -p /code/source
+COPY * /code/
+#COPY source /code/source
+#COPY Makefile /code/Makefile
+
 WORKDIR /code
 
-# Build Sphinx documentation
-RUN make html
-
+# Create a directory for Sphinx documentation source
+#RUN make html
 
 # Set environment variables
 ENV FLASK_APP=main.py \
     FLASK_DEBUG=0 \
     PYTHONUNBUFFERED=1
+
+#RUN ls
 
 # Copy SSL certificate files into the Docker image
 COPY fullchain.pem privkey.pem ./

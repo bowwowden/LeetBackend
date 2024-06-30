@@ -10,7 +10,7 @@ sudo docker-compose up -d app
 
 sudo docker-compose down
 
-docker-compose logs app | tail -100
+sudo docker-compose logs app | tail -100
 ```
 
 
