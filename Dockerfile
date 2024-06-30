@@ -14,7 +14,7 @@ COPY *.py /code/
 WORKDIR /code
 
 # Build Sphinx documentation
-RUN make -C /code/source html
+RUN make html
 
 
 # Set environment variables
