@@ -1,6 +1,6 @@
 import json
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
@@ -18,17 +18,34 @@ get_session = sessionmaker(bind=engine)
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})  # Allow requests from all origins
 
-
-
 @app.route('/api', methods=['GET', 'POST'])
-def welcome():
-    code = "<p> Code </p>"
-
-    return "<b> Hello World! </b> "
+@app.route('/api/<path:filename>')
+def welcome(filename='index.html'):
+    return send_from_directory('build/html', filename)
 
 
 @app.route('/submit/', methods=['POST'])
 def submit():
+    """
+    Submit code to judge0.
+
+    **Example Response**:
+
+    .. sourcecode:: http
+
+        HTTP/1.1 200 OK
+        Content-Type: application/json
+
+        [
+            {
+                "id": 1,
+                "name": "problem1"
+            }
+        ]
+
+    :return: JSON response with pass/fail of all test cases.
+    :rtype: flask.Response
+    """
     session = get_session()
 
     repo = repository.SqlAlchemyRepository(session)

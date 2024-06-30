@@ -17,7 +17,6 @@ class Problem:
     def __json__(self):
         return {
             "id": self.id,
-            "text": self.text,
             "title": self.title,
             "description": self.description,
             "category": self.category,

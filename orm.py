@@ -10,7 +10,6 @@ problems = Table(
     "problems",
     metadata,
     Column("id", Integer, primary_key=True, autoincrement=True),
-    Column("text", String(1000)),
     Column("title", String(1000)),
     Column("description", String(1000)),
     Column("category", String(255)),
@@ -18,15 +17,6 @@ problems = Table(
     Column("input_arrays", JSON, nullable=True),  # JSON field for Input_Arrays
 )
 
-# Not actually using this
-# test_cases = Table(
-#     "test_cases",
-#     metadata,
-#     Column("id", Integer, primary_key=True, autoincrement=True),
-#     Column("input", String(255)),
-#     Column("output", String(255)),
-#     Column("problem_id", ForeignKey("problems.id"))
-# )
 
 
 def start_mappers():

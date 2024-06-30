@@ -13,6 +13,14 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      # Run tests before deploying to VM
+      - name: Install Dependencies and Run Unit Tests
+        run: |
+          cd /home/linuxuser/LeetBackend/tests
+          pip install -r requirements.txt  # Install dependencies
+          python -m unittest discover tests  # Run unit tests
+              
+
       - name: Copy build to VM
         uses: appleboy/scp-action@master
         with:
@@ -22,6 +30,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           source: "."
           target: "/home/linuxuser/LeetBackendTemp"
+
 
       - name: Deploy to Virtual Machine
         uses: appleboy/ssh-action@master
@@ -37,7 +46,9 @@ jobs:
             cp -r /home/linuxuser/LeetBackendTemp/* /home/linuxuser/LeetBackend/
             docker-compose build
             docker-compose up -d app         
-            
+
+              
+              
 
 
 

@@ -13,6 +13,10 @@ RUN mkdir -p /code
 COPY *.py /code/
 WORKDIR /code
 
+# Build Sphinx documentation
+RUN make -C /code/source html
+
+
 # Set environment variables
 ENV FLASK_APP=main.py \
     FLASK_DEBUG=0 \

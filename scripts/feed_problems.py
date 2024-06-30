@@ -56,8 +56,42 @@ data2 = [
     }
 ]
 
-response = requests.post(url, json=data2)
-print(response)
+response = requests.get("http://localhost:5000/api/endpoint")
 
-
-
+import pytest
+import requests
+#
+# # Fixture to set up and tear down the Flask app and PostgreSQL container
+# @pytest.fixture(scope="session")
+# def setup_teardown():
+#     # Set up the test environment (e.g., start Flask app and PostgreSQL container)
+#     # Ensure the environment is torn down after the tests are finished
+#     # You can use Docker Compose or other tools to manage the test environment
+#     # For simplicity, let's assume Flask app and PostgreSQL container are already running
+#
+#     yield
+#
+#     # Tear down the test environment (e.g., stop Flask app and PostgreSQL container)
+#     # Clean up any resources used during testing
+#
+# # Test cases
+# def test_get_endpoint(setup_teardown):
+#     # Make a request to the API endpoint you want to test
+#     response = requests.get("http://localhost:5000/api/endpoint")
+#
+#     # Validate the response
+#     assert response.status_code == 200
+#     # Add more assertions to validate the response content, headers, etc.
+#
+# def test_post_endpoint(setup_teardown):
+#     # Make a request to the API endpoint you want to test
+#     payload = {"key": "value"}
+#     response = requests.post("http://localhost:5000/api/endpoint", json=payload)
+#
+#     # Validate the response
+#     assert response.status_code == 201
+#     # Add more assertions to validate the response content, headers, etc.
+#
+#
+#
+#
