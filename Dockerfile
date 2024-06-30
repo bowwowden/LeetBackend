@@ -10,15 +10,15 @@ COPY requirements.txt /tmp
 RUN pip install -r /tmp/requirements.txt
 
 RUN mkdir -p /code
-#RUN mkdir -p /code/source
+RUN mkdir -p /code/source
 COPY * /code/
-#COPY source /code/source
-#COPY Makefile /code/Makefile
+COPY source /code/source
+COPY Makefile /code/Makefile
 
 WORKDIR /code
 
 # Create a directory for Sphinx documentation source
-#RUN make html
+RUN make html
 
 # Set environment variables
 ENV FLASK_APP=main.py \
