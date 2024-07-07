@@ -53,6 +53,9 @@ jobs:
           docker-compose down
           rm -rf /home/linuxuser/LeetBackend/*
           cp -r /home/linuxuser/LeetBackendTemp/* /home/linuxuser/LeetBackend/
+        # Copy SSL certificates from Let's Encrypt directory
+          cp /etc/letsencrypt/live/yinyang.codes/fullchain.pem /home/linuxuser/LeetBackend/fullchain.pem
+          cp /etc/letsencrypt/live/yinyang.codes/privkey.pem /home/linuxuser/LeetBackend/privkey.pem
           docker-compose build
           docker-compose up -d app         
 
