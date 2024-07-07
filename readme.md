@@ -41,3 +41,14 @@ Note: judge0 has issues with newer versions of ubuntu so it needs a grub setting
 https://github.com/judge0/judge0/issues/325
 
 
+## Renewing Certs
+
+letsencrypt directory has keys for frontend, renew with certbot
+COPY fullchain.pem /etc/letsencrypt/live/yinyang.codes/
+COPY privkey.pem /etc/letsencrypt/live/yinyang.codes/
+
+for backend (here) 
+openssl req -newkey rsa:2048 -nodes -keyout privkey.pem -x509 -days 365 -out fullchain.pem
+
+
+
