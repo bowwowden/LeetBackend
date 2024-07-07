@@ -36,6 +36,9 @@ Supported languages
 ```angular2html
 curl 192.168.0.220:2358/languages | jq | less
 ```
+89 is multi-file program
+
+
 
 Note: judge0 has issues with newer versions of ubuntu so it needs a grub setting change.
 https://github.com/judge0/judge0/issues/325
@@ -50,5 +53,33 @@ COPY privkey.pem /etc/letsencrypt/live/yinyang.codes/
 for backend (here) 
 openssl req -newkey rsa:2048 -nodes -keyout privkey.pem -x509 -days 365 -out fullchain.pem
 
+## Stop killing the Postgres container
 
+Eventually I'll want the database to be consistent across github action builds, so I would only kill and rebuild the flask app.
+
+Possible modification to github action
+
+```yaml
+- name: Deploy to Virtual Machine
+  uses: appleboy/ssh-action@master
+  with:
+    host: ${{ secrets.SSH_HOST }}
+    username: ${{ secrets.SSH_USERNAME }}
+    key: ${{ secrets.SSH_PRIVATE_KEY }}
+    port: ${{ secrets.SSH_PORT }}
+    script: |
+        cd /home/linuxuser/LeetBackend/
+        docker-compose stop app
+        docker-compose rm -f app  # Remove the stopped container
+        rm -rf /home/linuxuser/LeetBackend/*
+        cp -r /home/linuxuser/LeetBackendTemp/* /home/linuxuser/LeetBackend/
+        # Copy SSL certificates from Let's Encrypt directory
+        cp /etc/letsencrypt/live/yinyang.codes/fullchain.pem /home/linuxuser/LeetBackend/fullchain.pem
+        cp /etc/letsencrypt/live/yinyang.codes/privkey.pem /home/linuxuser/LeetBackend/privkey.pem
+        # Rebuild only the Python API service
+        docker-compose build app
+        # Bring up the API service
+        docker-compose up -d app
+
+```
 

@@ -2,13 +2,12 @@ import requests
 
 url = 'http://192.168.0.220:2358/'
 
-
 myobj =   {
             "source_code": "print(\"hello world\")",
             "language_id": 71, # 50 for C, 73 rust, 55 commonl isp
             # "stdin": "world"
            }
-# data = {"orderid": orderid, "sku": unknown_sku, "qty": 20}
+
 x = requests.post((url + 'submissions/?base64_encoded=false&wait=false'), json = myobj)
 
 # Parse the JSON response
