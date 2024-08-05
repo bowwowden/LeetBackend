@@ -1,7 +1,7 @@
 
 # Run
 
-Commands for docker compose to run and test application.
+Commands for docker compose to run and test application. Requires ssl.
 
 ```bash
 sudo docker-compose build
@@ -82,4 +82,7 @@ Possible modification to github action
         docker-compose up -d app
 
 ```
+
+make html - rebuild sphinx docs
+weirdly i saw an issue where it would update on the server but not on my local.
 

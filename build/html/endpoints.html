@@ -34,24 +34,386 @@
   <section id="module-main">
 <span id="api-documentation"></span><h1>API Documentation<a class="headerlink" href="#module-main" title="Link to this heading">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="main.addproblems">
-<span class="sig-name descname"><span class="pre">addproblems</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.addproblems" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt class="sig sig-object py" id="main.addproblem">
+<span class="sig-name descname"><span class="pre">addproblem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.addproblem" title="Link to this definition">¶</a></dt>
+<dd><p>Add a new problem with test cases.</p>
+<p>This endpoint allows users to submit a new problem to the system along with its details
+such as title, description, category, difficulty, and a solution code. It also allows
+for the addition of test cases associated with the problem.</p>
+<p><strong>Example Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/addproblem</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sample Problem&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This is a sample problem description.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Algorithm&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;difficulty&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Medium&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;solutions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;file_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/path/to/fizzbuzz.py&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lisp&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;file_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/path/to/fizzbuzz.lisp&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;test_cases&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;param1&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;param2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;expected_outputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;param1&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;param2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;expected_outputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Added&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;problem_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;test_cases&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;param1&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;param2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;expected_outputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Fizz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;4&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Buzz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Fizz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;7&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;8&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Fizz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Buzz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;11&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Fizz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;13&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;14&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;FizzBuzz&quot;</span><span class="p">]}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;param1&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;param2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;expected_outputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Fizz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;4&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Buzz&quot;</span><span class="p">]}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Request Parameters</strong>:</p>
+<ul class="simple">
+<li><p><cite>title</cite> (string) – The title of the problem.</p></li>
+<li><p><cite>description</cite> (string) – A detailed description of the problem.</p></li>
+<li><p><cite>category</cite> (string) – The category of the problem (e.g., Algorithm, Data Structure).</p></li>
+<li><p><cite>difficulty</cite> (string) – The difficulty level of the problem (e.g., Easy, Medium, Hard).</p></li>
+<li><dl class="simple">
+<dt><cite>solutions</cite> (list) – A list of solution objects, each containing:</dt><dd><ul>
+<li><p><cite>language</cite> (string) – The programming language of the solution (e.g., python, lisp).</p></li>
+<li><p><cite>file_path</cite> (string) – The path to the solution file.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><cite>test_cases</cite> (list) – A list of test cases, each containing <cite>inputs</cite> and <cite>expected_outputs</cite> fields.</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p>JSON response indicating the success or failure of adding the problem.</p></li>
+<li><p>The response will include the <cite>problem_id</cite> if the problem is successfully added.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON response with the result of the operation.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>flask.Response</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="main.getproblem">
 <span class="sig-name descname"><span class="pre">getproblem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">problem_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#main.getproblem" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Retrieve detailed information about a specific problem, including its solutions, test cases, and submissions.</p>
+<p>This endpoint returns comprehensive details about a problem specified by its ID. It includes problem metadata, solution contents, test cases, and submissions.</p>
+<p><strong>Example Request</strong>:</p>
+<blockquote>
+<div><p>GET /getproblem/1 HTTP/1.1</p>
+</div></blockquote>
+<p><strong>Example Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FizzBuzz&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Write a program that prints the numbers from 1 to 100. For multiples of three, print &#39;Fizz&#39; instead of the number, for multiples of five, print &#39;Buzz&#39;, and for numbers which are multiples of both three and five, print &#39;FizzBuzz&#39;.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Algorithm&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;difficulty&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Easy&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;solutions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;file_content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;# Solution code here...&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;test_cases&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;problem_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;param1&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;param2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;expected_outputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Fizz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;4&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Buzz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Fizz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;7&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;8&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Fizz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Buzz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;11&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Fizz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;13&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;14&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;FizzBuzz&quot;</span><span class="p">]</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;submissions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;problem_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;submission_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-08-01T12:00:00Z&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Accepted&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Request Method</strong>:</p>
+<ul class="simple">
+<li><p>GET</p></li>
+</ul>
+<p><strong>Request Parameters</strong>:</p>
+<ul class="simple">
+<li><p><cite>problem_id</cite> (int) – The unique identifier of the problem to retrieve.</p></li>
+</ul>
+<p><strong>Responses</strong>:</p>
+<ul>
+<li><p>200 OK: A JSON object containing:
+- <cite>id</cite> (int) – The unique identifier of the problem.
+- <cite>title</cite> (str) – The title of the problem.
+- <cite>description</cite> (str) – A detailed description of the problem.
+- <cite>category</cite> (str) – The category under which the problem falls.
+- <cite>difficulty</cite> (str) – The difficulty level of the problem.
+- <cite>solutions</cite> (list of dicts) – A list of dictionaries representing solutions to the problem. Each dictionary includes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>id</cite> (int) – The unique identifier of the solution.</p></li>
+<li><p><cite>language</cite> (str) – The programming language of the solution.</p></li>
+<li><p><cite>file_content</cite> (str) – The content of the solution file. If the file is not found, the content will be “File not found”.</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p><cite>test_cases</cite> (list of dicts) – A list of test case dictionaries, each representing a test case for the problem.</p></li>
+<li><p><cite>submissions</cite> (list of dicts) – A list of submission dictionaries, each representing a submission for the problem.</p></li>
+</ul>
+</li>
+<li><p>400 Bad Request: If an error occurs during processing. The response will contain a JSON object with an <cite>error</cite> field describing the issue.</p></li>
+<li><p>404 Not Found: If the problem with the specified <cite>problem_id</cite> is not found. The response will contain a JSON object with an <cite>error</cite> field indicating “Problem not found.”</p></li>
+</ul>
+<p><strong>Notes</strong>:</p>
+<ul class="simple">
+<li><p>If the solution file path is incorrect or the file is missing, the <cite>file_content</cite> will indicate “File not found”.</p></li>
+<li><p>The <cite>__json__</cite> method should be defined in the <cite>TestCase</cite> and <cite>Submission</cite> models to serialize the test case and submission data into a dictionary format.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON response with the detailed problem information.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>flask.Response</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="main.getproblems">
-<span class="sig-name descname"><span class="pre">getproblems</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.getproblems" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt class="sig sig-object py" id="main.getproblemspage">
+<span class="sig-name descname"><span class="pre">getproblemspage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.getproblemspage" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve a list of problems with their basic details.</p>
+<p>This endpoint returns a list of problems, including their ID, title,
+category, and difficulty level. This information is used to display
+problems in a summary view, allowing users to select a problem to view
+more detailed information.</p>
+<p><strong>Example Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/getproblems</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</pre></div>
+</div>
+<p><strong>Example Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FizzBuzz&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Algorithm&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;difficulty&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Easy&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Two Sum&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Algorithm&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;difficulty&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Medium&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Request Method</strong>:</p>
+<ul class="simple">
+<li><p>GET</p></li>
+</ul>
+<p><strong>Responses</strong>:</p>
+<ul class="simple">
+<li><p>200 OK: A JSON array of problem objects, each containing:
+- <cite>id</cite> (int) – The unique identifier for the problem.
+- <cite>title</cite> (str) – The title of the problem.
+- <cite>category</cite> (str) – The category under which the problem falls.
+- <cite>difficulty</cite> (str) – The difficulty level of the problem.</p></li>
+<li><p>400 Bad Request: If an error occurs while retrieving the problems. The response
+will contain a JSON object with an <cite>error</cite> field describing the issue.</p></li>
+</ul>
+<p><strong>Notes</strong>:</p>
+<ul class="simple">
+<li><p>The response excludes detailed information about solutions, test cases, and submissions.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON array of problem summaries.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>flask.Response</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="main.getsolutions">
-<span class="sig-name descname"><span class="pre">getsolutions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.getsolutions" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt class="sig sig-object py" id="main.getsolution">
+<span class="sig-name descname"><span class="pre">getsolution</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.getsolution" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve the solution file for a given problem and programming language.</p>
+<p>This endpoint returns the content of a solution file based on the provided
+problem ID and programming language. The response includes the solution’s
+ID, problem ID, language, and the content of the solution file.</p>
+<p><strong>Example Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/getsolution/</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;problem_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;problem_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;file_content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;def solve(): pass&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Request Method</strong>:</p>
+<ul class="simple">
+<li><p>POST</p></li>
+</ul>
+<p><strong>Responses</strong>:</p>
+<ul class="simple">
+<li><p>200 OK: A JSON object containing:
+- <cite>id</cite> (int) – The unique identifier for the solution.
+- <cite>problem_id</cite> (int) – The ID of the associated problem.
+- <cite>language</cite> (str) – The programming language of the solution.
+- <cite>file_content</cite> (str) – The content of the solution file.</p></li>
+<li><p>400 Bad Request: If the <cite>problem_id</cite> or <cite>language</cite> is missing or if an
+error occurs during processing. The response will contain a JSON object
+with an <cite>error</cite> field describing the issue.</p></li>
+<li><p>404 Not Found: If the solution file or the solution itself is not found.
+The response will contain a JSON object with an <cite>error</cite> field indicating
+“Solution file not found” or “Solution not found.”</p></li>
+</ul>
+<p><strong>Notes</strong>:</p>
+<ul class="simple">
+<li><p>The solution file path is constructed relative to the current working directory.</p></li>
+<li><p>Ensure that the <cite>file_path</cite> field in the <cite>Solution</cite> model does not start with a leading slash to avoid incorrect absolute paths.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON response with the solution details.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>flask.Response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="main.gettestcases">
+<span class="sig-name descname"><span class="pre">gettestcases</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.gettestcases" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieve all test cases associated with a given problem ID.</p>
+<p>This endpoint retrieves a list of test cases for a specified problem. Each test case includes
+details such as inputs and expected outputs.</p>
+<p><strong>Example Request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/gettestcase/</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;problem_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example Response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;test_cases&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;problem_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;param1&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;param2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;expected_outputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Fizz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;4&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Buzz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Fizz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;7&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;8&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Fizz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Buzz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;11&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Fizz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;13&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;14&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;FizzBuzz&quot;</span><span class="p">]</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;problem_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;param1&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;param2&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;expected_outputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;result&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Fizz&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;4&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Buzz&quot;</span><span class="p">]</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Request Parameters</strong>:</p>
+<ul class="simple">
+<li><p><cite>problem_id</cite> (int) – The unique identifier of the problem whose test cases are to be retrieved.</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p>200 OK: A JSON response containing a <cite>test_cases</cite> key, which is a list of dictionaries. Each dictionary represents a test case and includes:
+- <cite>id</cite> (int) – The unique identifier of the test case.
+- <cite>problem_id</cite> (int) – The ID of the associated problem.
+- <cite>inputs</cite> (dict) – A dictionary of input parameters for the test case.
+- <cite>expected_outputs</cite> (dict) – A dictionary of expected outputs for the test case.</p></li>
+<li><p>400 Bad Request: If the <cite>problem_id</cite> is missing or if an error occurs during processing. The response will contain a JSON object with an <cite>error</cite> field describing the issue.</p></li>
+<li><p>404 Not Found: If no test cases are found for the specified <cite>problem_id</cite>. The response will contain a JSON object with an <cite>error</cite> field indicating “No test cases found for this problem.”</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>JSON response with the list of test cases or an error message.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>flask.Response</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="main.submit">
@@ -102,10 +464,11 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">Project Overview</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#main.addproblems"><code class="docutils literal notranslate"><span class="pre">addproblems()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.addproblem"><code class="docutils literal notranslate"><span class="pre">addproblem()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#main.getproblem"><code class="docutils literal notranslate"><span class="pre">getproblem()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#main.getproblems"><code class="docutils literal notranslate"><span class="pre">getproblems()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#main.getsolutions"><code class="docutils literal notranslate"><span class="pre">getsolutions()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.getproblemspage"><code class="docutils literal notranslate"><span class="pre">getproblemspage()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.getsolution"><code class="docutils literal notranslate"><span class="pre">getsolution()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#main.gettestcases"><code class="docutils literal notranslate"><span class="pre">gettestcases()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#main.submit"><code class="docutils literal notranslate"><span class="pre">submit()</span></code></a></li>
 </ul>
 </li>
