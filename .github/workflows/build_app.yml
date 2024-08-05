@@ -13,12 +13,17 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Set up Docker Compose
+        run: |
+          docker-compose build
+          docker-compose up -d app
+
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
           # Optionally install any other dependencies needed for testing
 
-      - name: Run tests
+      - name: Run API Tests
         run: |
           python -m unittest discover tests
 

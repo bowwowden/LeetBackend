@@ -76,7 +76,7 @@ class FlaskTestCase(unittest.TestCase):
         self.assertIsInstance(response_json["problem_id"], int)
 
     def test_get_problems_page(self):
-        response = self.app.get('/getproblems')
+        response = self.app.get('/getproblems/')
 
         response_data = response.data.decode()
 
