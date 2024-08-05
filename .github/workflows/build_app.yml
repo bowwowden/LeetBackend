@@ -36,6 +36,11 @@ jobs:
         run: |
           python -m unittest discover tests
 
+      - name: Shut Down Docker Containers
+        run: |
+          docker-compose down
+
+
   build:
     runs-on: ubuntu-latest
     needs: test  # Ensure 'test' job completes successfully before running 'build'

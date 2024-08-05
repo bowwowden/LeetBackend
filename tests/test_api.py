@@ -109,7 +109,7 @@ class FlaskTestCase(unittest.TestCase):
 
     def test_get_solution(self):
         payload = {
-            'problem_id': 2,
+            'problem_id': 1,
             'language': 'python'
         }
         response = self.app.post('/getsolution/', json=payload)
@@ -127,7 +127,7 @@ class FlaskTestCase(unittest.TestCase):
         self.assertIn('file_content', response_json)
 
         # Additional assertions to verify the content
-        self.assertEqual(response_json['problem_id'], 2)
+        self.assertEqual(response_json['problem_id'], 1)
         self.assertEqual(response_json['language'], 'python')
         self.assertTrue(len(response_json['file_content']) > 0)  # Ensure file content is not empty
 
