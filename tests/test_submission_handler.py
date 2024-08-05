@@ -53,8 +53,8 @@ class TestPythonSubmission(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
         self.session = aiohttp.ClientSession()
         # judge0 external ip judge0_url = 'http://155.138.214.97:2358/'
-        self.url = 'http://192.168.0.220:2358/'  # internal
-        # self.url = 'http://155.138.214.97:2358/'
+        # self.url = 'http://192.168.0.220:2358/'  # internal
+        self.url = 'http://155.138.214.97:2358/'
 
     async def asyncTearDown(self):
         await self.session.close()
